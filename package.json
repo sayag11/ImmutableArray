@@ -5,4 +5,10 @@
   "license": "MIT",
   "repository": "sayag11/ImmutableArrayMap",
   "main": "ImmutableArrayMap.js",
+    "keywords": [
+    "react-redux",
+    "immutable array",
+    "npm",
+    "package",
+  ]
 }
