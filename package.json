@@ -1,6 +1,6 @@
 {
   "name": "immutable-array-map",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Immutable Array data structure with Map capabilities",
   "license": "MIT",
   "repository": "sayag11/ImmutableArray",
