@@ -3,12 +3,12 @@
   "version": "2.3.0",
   "description": "Immutable data structure with Array and Map capabilities",
   "license": "MIT",
-  "repository": "sayag11/ImmutableArray",
+  "repository": "sayag11/ImmutableArrayMap",
   "main": "ImmutableArrayMap.js",
-  "keywords": [
-    "ImmutableArray",
+    "keywords": [
+    "react-redux",
+    "immutable array",
     "npm",
     "package",
-    "sayag11"
   ]
 }

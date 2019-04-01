@@ -1,4 +1,4 @@
-# Project Title
+# ImmutableArrayMap
 
 ImmutableArrayMap is a data structure that contains:
 1) Array to save the data
