@@ -1,12 +1,12 @@
 /**
- * ImmutableArray is a data structure that contains:
+ * ImmutableArrayMap is a data structure that contains:
  * 1) Array to save the data [ {idAttribute: x, ...restItem}, ...restData]
  * 2) Map {idAttribute: arrIndex} to maintain pointers to the index in the array
  * It allows get, update and add in constant time (depending on the number of changed/added items)
  */
-export default class ImmutableArray {
+export default class ImmutableArrayMap {
 	/**
-	 * Create a new ImmutableArray instance from a given array.
+	 * Create a new ImmutableArrayMap instance from a given array.
 	 * Unless a map will be passed excplicitly, a new map will be built based on the idAttribute
 	 * @param {Array} arr
 	 * @param {String} idAttribute
@@ -20,8 +20,8 @@ export default class ImmutableArray {
 }
 
 /**
- * returns a reference to a new ImmutableArray object, with the existing data.
- * @returns {ImmutableArray}
+ * returns a reference to a new ImmutableArrayMap object, with the existing data.
+ * @returns {ImmutableArrayMap}
  * @private
  */
 const _clone = (self) => {
@@ -35,7 +35,7 @@ const _clone = (self) => {
  */
 const _setItem = (self, item) => {
 	const id = item && item[self._idAttribute];
-	const mapItem = self._map?.[id];
+	const mapItem = self._map & self._map[id];
 	if (mapItem != null) {
 		self._arr[mapItem] = {...item};
 	}
@@ -60,9 +60,9 @@ export const buildMap = (self) => {
 
 /**
  * Updates the array with the passed items.
- * Returns a reference to an updated new ImmutableArray object.
+ * Returns a reference to an updated new ImmutableArrayMap object.
  * @param {Array} items
- * @returns {ImmutableArray}
+ * @returns {ImmutableArrayMap}
  */
 export const update = (self, items) => {
 	if (!(items instanceof Array)) items = [items];
@@ -75,16 +75,16 @@ export const update = (self, items) => {
 
 /**
  * add new items to the array, update the map accordingly.
- * Returns a reference to an updated new ImmutableArray object.
+ * Returns a reference to an updated new ImmutableArrayMap object.
  * @param {Array} items
- * @returns {ImmutableArray}
+ * @returns {ImmutableArrayMap}
  */
 export const add = (self, items) => {
 	if (!(items instanceof Array)) items = [items];
 	for (let i = 0; i < items.length; i++) {
 		const item = items[i];
         const id = item && item[self._idAttribute];
-		const mapItem = self._map?.[id];
+		const mapItem = self._map && self._map[id];
 
 		if (mapItem == null) {
 			self._arr.push(item);
@@ -97,16 +97,16 @@ export const add = (self, items) => {
 
 /**
  * removes an item from the array, re-build the map accordingly.
- * If the id is not found, return the same ImmutableArray object.
- * Else return a reference to an updated new ImmutableArray object.
+ * If the id is not found, return the same ImmutableArrayMap object.
+ * Else return a reference to an updated new ImmutableArrayMap object.
  * @param {String} id
- * @returns {ImmutableArray}
+ * @returns {ImmutableArrayMap}
  */
 export const remove = (self, ids) => {
 	if (!(ids instanceof Array)) ids = [ids];
 
 	ids.forEach(id => {
-		const index = self._map?.[id];
+		const index = self._map && self._map[id];
 		self._arr[index] = 'toRemove';
 	});
 
@@ -130,7 +130,7 @@ export const remove = (self, ids) => {
  * @returns {Array}
  */
 export const getItem = (self, id) => {
-	const index = self?._map?.[id];
+	const index = self && self._map && self._map[id];
 	return index != null && self._arr[index];
 };
 
@@ -140,7 +140,7 @@ export const getItem = (self, id) => {
  * @returns {Array}
  */
 export const getIndex = (self, id) => {
-	return self?._map?.[id];
+	return self && self._map && self._map[id];
 };
 
 export const isLast = (self, id) => {
@@ -156,10 +156,10 @@ export const size = (self) => {
 };
 
 /**
- * return the array of the ImmutableArray.
+ * return the array of the ImmutableArrayMap.
  * @returns {Array}
  /**
- * return the array of the ImmutableArray.
+ * return the array of the ImmutableArrayMap.
  * @returns {Array}
  */
 export const getArray = (self) => {
