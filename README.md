@@ -23,9 +23,5 @@ const data = new ImmutableArrayMap([], 'id', {});
 
 ```
 
-## Features
-
-* **Yehonatan Sayag** - *Initial work* - [sayag11](https://github.com/sayag11)
-
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
